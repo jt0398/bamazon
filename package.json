@@ -1,0 +1,26 @@
+{
+    "name": "bamazon",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bamazonCustomer.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jt0398/bamazon.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jt0398/bamazon/issues"
+    },
+    "homepage": "https://github.com/jt0398/bamazon#readme",
+    "dependencies": {
+        "dotenv": "^8.1.0",
+        "easy-table": "^1.1.1",
+        "inquirer": "^7.0.0",
+        "mysql": "^2.17.1"
+    }
+}
