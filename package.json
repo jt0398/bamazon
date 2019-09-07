@@ -22,5 +22,6 @@
         "easy-table": "^1.1.1",
         "inquirer": "^7.0.0",
         "mysql": "^2.17.1"
-    }
+    },
+    "devDependencies": {}
 }

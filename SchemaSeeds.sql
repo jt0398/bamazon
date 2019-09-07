@@ -40,27 +40,8 @@ VALUES ('CK Mens Sweatshirt',1,35.50,50),
         ('Optimus Prime Exclusive Figure',5,20.00,30),
         ('LEGO Marvel Spider-Man Building Kit',5,20.00,30);
 
-CREATE PROCEDURE `GetProducts`()
-BEGIN
-	SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity  FROM products AS p
-	INNER JOIN departments AS d ON d.department_id = p.department_id
-	ORDER BY p.item_id;
-END
-
-CREATE PROCEDURE `UpdateProductPrice`(
-	itemID INT,
-	quantity INT
-)
-BEGIN
-	UPDATE products SET stock_quantity = stock_quantity - quantity WHERE item_id = itemID;
-END
-
-CREATE PROCEDURE `GetProductLowStock` ()
-BEGIN
-	SELECT * FROM products WHERE stock_quantity < 5;
-END
-
-CREATE PROCEDURE `AddProduct` (
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddProduct`(
 	productName VARCHAR(100),
     departmentID INT,
     price DECIMAL(10,4),
@@ -69,5 +50,32 @@ CREATE PROCEDURE `AddProduct` (
 BEGIN
 	INSERT INTO product (product_name, department_id, price, stock_quantity)
     VALUES (productName,departmentID,price,stockQuantity);
-END
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProductLowStock`()
+BEGIN
+	SELECT * FROM products WHERE stock_quantity < 5;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProducts`()
+BEGIN
+	SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity  FROM products AS p
+	INNER JOIN departments AS d ON d.department_id = p.department_id
+	ORDER BY p.item_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateProductQuantity`(
+	itemID INT,
+	quantity INT
+)
+BEGIN
+	UPDATE products SET stock_quantity = stock_quantity + quantity WHERE item_id = itemID;
+END$$
+DELIMITER ;
 
