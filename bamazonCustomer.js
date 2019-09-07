@@ -61,10 +61,10 @@ async function buyProduct(product, quantity) {
     //If there's enough stock, updates the stock quantity in the database
     if (product.stock_quantity > quantity) {
 
-        await store.updateProductQuantity(product.item_id, quantity * -1);
-
         //Calculates total price
         let total = product.price * quantity;
+
+        await store.updateProductSale(product.item_id, quantity, total);
 
         //Display total purchase price in console
         console.log(`Thank you for your purchase. Item purchased:

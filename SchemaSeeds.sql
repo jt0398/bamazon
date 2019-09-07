@@ -7,24 +7,25 @@ USE bamazonDB;
 CREATE TABLE departments (
     department_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL,
-    over_head_costs INT(10)
+    over_head_costs decimal(10,4) NOT NULL DEFAULT '0.0000'
 );
 
 CREATE TABLE products (
     item_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
-    department_id INT(10),
-    price DECIMAL(10,4),
-    stock_quantity INT(10),
+    department_id INT(10) NOT NULL,
+    price DECIMAL(10,4) NOT NULL DEFAULT '0.0000',
+    stock_quantity INT(10) NOT NULL DEFAULT '0',
+    product_sales decimal(10,10) NOT NULL DEFAULT '0.0000',
     FOREIGN KEY (department_id) REFERENCES departments(department_id)
 );
 
 INSERT INTO departments (department_name,over_head_costs)
-VALUES ('Clothing & Accessories', 100),
-        ('Sports & Outdoors', 50),
-        ('Electronics', 75),
-        ('Books', 45),
-        ('Toys & Games', 45);
+VALUES ('Clothing & Accessories', 1000),
+        ('Sports & Outdoors', 5000),
+        ('Electronics', 7500),
+        ('Books', 4500),
+        ('Toys & Games', 4500);
 
 INSERT INTO products (product_name,department_id,price,stock_quantity)
 VALUES ('CK Mens Sweatshirt',1,35.50,50),
@@ -48,7 +49,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `AddProduct`(
     stockQuantity INT
 )
 BEGIN
-	INSERT INTO product (product_name, department_id, price, stock_quantity)
+	INSERT INTO products (product_name, department_id, price, stock_quantity)
     VALUES (productName,departmentID,price,stockQuantity);
 END$$
 DELIMITER ;
@@ -76,6 +77,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateProductQuantity`(
 )
 BEGIN
 	UPDATE products SET stock_quantity = stock_quantity + quantity WHERE item_id = itemID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDepartments`()
+BEGIN
+	SELECT * FROM departments;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateProductQuantitySale`(
+	itemID INT,
+	quantity INT,
+    totalSale DECIMAL(10,4)
+)
+BEGIN
+	UPDATE products SET stock_quantity = stock_quantity - quantity, product_sales = product_sales + totalSale WHERE item_id = itemID;
 END$$
 DELIMITER ;
 

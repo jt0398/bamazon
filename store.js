@@ -27,6 +27,18 @@ var Store = function() {
         });
     }
 
+    this.updateProductSale = function(productID, quantity, totalSale) {
+
+        return new Promise(resolve => {
+
+            pool.query("CALL UpdateProductQuantitySale(?,?,?)", [productID, quantity, totalSale], function(error, results) {
+                if (error) throw error;
+                resolve(results);
+            });
+
+        });
+    }
+
     this.getLowInventory = function() {
 
         return new Promise(resolve => {
@@ -49,6 +61,34 @@ var Store = function() {
                 if (error) throw error;
 
                 resolve(results[0]);
+            });
+
+        });
+
+    };
+
+    this.getDepartments = function() {
+
+        return new Promise(resolve => {
+
+            pool.query("CALL GetDepartments()", function(error, results, fields) {
+                if (error) throw error;
+
+                resolve(results[0]);
+            });
+
+        });
+
+    };
+
+    this.addProduct = function(productName, departmentID, price, quantity) {
+
+        return new Promise(resolve => {
+
+            pool.query("CALL AddProduct(?,?,?,?)", [productName, departmentID, price, quantity], function(error, results, fields) {
+                if (error) throw error;
+
+                resolve(results);
             });
 
         });
