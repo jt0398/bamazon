@@ -113,12 +113,13 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDepartmentSales`()
 BEGIN
-	SELECT d.department_id, d.department_name, d.over_head_costs, SUM(p.product_sales) AS product_sales, CAST(SUM(p.product_sales) - d.over_head_costs AS SIGNED)  AS total_profit
+	SELECT d.department_id, d.department_name, d.over_head_costs, COALESCE(SUM(p.product_sales),0) AS product_sales, COALESCE(CAST(SUM(p.product_sales) - d.over_head_costs AS SIGNED),0)  AS total_profit
     FROM departments AS d
-	INNER JOIN products AS p ON p.department_id = d.department_id
+	LEFT JOIN products AS p ON p.department_id = d.department_id
     GROUP BY d.department_id
 	ORDER BY d.department_id;
 END$$
 DELIMITER ;
+
 
 

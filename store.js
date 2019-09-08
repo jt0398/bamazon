@@ -7,6 +7,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to get all prodution information
             pool.query("CALL GetProducts()", function(error, results, fields) {
                 if (error) throw error;
                 resolve(results[0]);
@@ -19,6 +20,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to update a specific product quantity
             pool.query("CALL UpdateProductQuantity(?,?)", [productID, quantity], function(error, results) {
                 if (error) throw error;
                 resolve(results);
@@ -31,6 +33,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to update product quantity and product sale
             pool.query("CALL UpdateProductQuantitySale(?,?,?)", [productID, quantity, totalSale], function(error, results) {
                 if (error) throw error;
                 resolve(results);
@@ -43,6 +46,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to get all prodution with stock quantity less than 5
             pool.query("CALL GetProductLowStock()", function(error, results, fields) {
                 if (error) throw error;
 
@@ -57,7 +61,8 @@ var Store = function() {
 
         return new Promise(resolve => {
 
-            pool.query("CALL GetProductLowStock()", function(error, results, fields) {
+            //Calls stored procedure to update product quantity
+            pool.query("CALL UpdateProductQuantity(?,?)", [productID, quantity], function(error, results, fields) {
                 if (error) throw error;
 
                 resolve(results[0]);
@@ -71,6 +76,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to get all department information
             pool.query("CALL GetDepartments()", function(error, results, fields) {
                 if (error) throw error;
 
@@ -85,6 +91,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to add a new product with information provided
             pool.query("CALL AddProduct(?,?,?,?)", [productName, departmentID, price, quantity], function(error, results, fields) {
                 if (error) throw error;
 
@@ -99,6 +106,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls a store procedure to get department sales information
             pool.query("CALL GetDepartmentSales()", function(error, results, fields) {
                 if (error) throw error;
 
@@ -113,6 +121,7 @@ var Store = function() {
 
         return new Promise(resolve => {
 
+            //Calls stored procedure to add a new department with information provided
             pool.query("CALL AddDepartment(?,?)", [departmentName, overHeadCost], function(error, results, fields) {
                 if (error) throw error;
 

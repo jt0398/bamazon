@@ -6,8 +6,10 @@ var store = new Store();
 
 const getMenu = function() {
 
+    //Menu list
     const list = ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"];
 
+    //Convert string array into an array of objects
     const choices = list.map((item, index) => {
 
         return {
@@ -17,8 +19,8 @@ const getMenu = function() {
         }
     });
 
+    //returns a rawlist type
     return {
-
         type: 'rawlist',
         message: 'What do you want to do?',
         name: 'action',
@@ -29,6 +31,7 @@ const getMenu = function() {
 
 async function showMenu() {
 
+    //Prompts user to choose from the menu
     const answer = await inquirer.prompt(getMenu());
 
     switch (answer.action) {
@@ -44,9 +47,12 @@ async function showMenu() {
         case 4:
             addNewProduct();
             break;
+        default:
+            process.exit();
     }
 }
 
+//Retrieves all product data from MySQL and displays them in console
 async function showAllProducts() {
 
     const productList = await store.getAllProducts();
@@ -66,10 +72,9 @@ async function showAllProducts() {
     //Display the product list in console in a table format
     console.log("\nALL PRODUCTS\n\n" + table.toString());
 
-    showMenu();
-
 }
 
+//Retrieves all product in the database with stock quanity less than 5
 async function showLowInventory() {
 
     const productList = await store.getLowInventory();
@@ -97,6 +102,7 @@ async function showLowInventory() {
 
 }
 
+//Prompts user to choose from list of products to add new inventory and updates database
 async function addToInventory() {
 
     const productList = await store.getAllProducts();
@@ -148,6 +154,7 @@ async function addToInventory() {
 
 }
 
+//Prompts user for new product information and add it to the database
 async function addNewProduct() {
 
     const departmentList = await store.getDepartments();
@@ -165,6 +172,8 @@ async function addNewProduct() {
     //Display the department list in console in a table format
     console.log("\nALL DEPARTMENTS\n\n" + table.toString());
 
+
+    //User gets prompted for department ID, product name, price and quantity
     const questions = [{
             type: "input",
             name: "departmentID",
@@ -189,12 +198,12 @@ async function addNewProduct() {
 
     const answers = await inquirer.prompt(questions);
 
+    //Adds product information to the database
     const results = await store.addProduct(answers.productName, answers.departmentID, answers.price, answers.quantity);
 
     console.log("\nProduct added successfully.\n\n");
 
     showMenu();
 }
-
 
 showMenu();

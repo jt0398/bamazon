@@ -6,7 +6,7 @@ const Table = require("easy-table"); //Module that displays data in a table form
 
 var store = new Store();
 
-//Retrieves product data from MySQL and them in console
+//Retrieves product data from MySQL and displays them in console
 async function showMenu() {
     const productList = await store.getAllProducts();
 
@@ -89,6 +89,8 @@ async function buyProduct(product, quantity) {
         //If user chooses to do another purchase, display the product list in console
         if (answers.continue) {
             showMenu();
+        } else {
+            process.exit();
         }
     });
 
