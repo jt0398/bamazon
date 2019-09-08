@@ -7,14 +7,14 @@ USE bamazonDB;
 CREATE TABLE departments (
     department_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL,
-    over_head_costs decimal(10,4) NOT NULL DEFAULT '0.0000'
+    over_head_costs DECIMAL(15,4) NOT NULL DEFAULT '0.0000'
 );
 
 CREATE TABLE products (
     item_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
     department_id INT(10) NOT NULL,
-    price DECIMAL(10,4) NOT NULL DEFAULT '0.0000',
+    price DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
     stock_quantity INT(10) NOT NULL DEFAULT '0',
     product_sales decimal(10,10) NOT NULL DEFAULT '0.0000',
     FOREIGN KEY (department_id) REFERENCES departments(department_id)
@@ -45,7 +45,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddProduct`(
 	productName VARCHAR(100),
     departmentID INT,
-    price DECIMAL(10,4),
+    price DECIMAL(15,4),
     stockQuantity INT
 )
 BEGIN
@@ -92,7 +92,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateProductQuantitySale`(
 	itemID INT,
 	quantity INT,
-    totalSale DECIMAL(10,4)
+    totalSale DECIMAL(15,4)
 )
 BEGIN
 	UPDATE products SET stock_quantity = stock_quantity - quantity, product_sales = product_sales + totalSale WHERE item_id = itemID;
@@ -102,7 +102,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddDepartment`(
 	departmentName VARCHAR(100),
-    overHeadCost DECIMAL(10,4)
+    overHeadCost DECIMAL(15,4)
 )
 BEGIN
 	INSERT INTO departments (department_name,over_head_costs)
