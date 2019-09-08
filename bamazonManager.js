@@ -72,6 +72,8 @@ async function showAllProducts() {
     //Display the product list in console in a table format
     console.log("\nALL PRODUCTS\n\n" + table.toString());
 
+    showMenu();
+
 }
 
 //Retrieves all product in the database with stock quanity less than 5
