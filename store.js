@@ -94,6 +94,34 @@ var Store = function() {
         });
 
     };
+
+    this.getDepartmentSales = function() {
+
+        return new Promise(resolve => {
+
+            pool.query("CALL GetDepartmentSales()", function(error, results, fields) {
+                if (error) throw error;
+
+                resolve(results[0]);
+            });
+
+        });
+
+    };
+
+    this.addDepartment = function(departmentName, overHeadCost) {
+
+        return new Promise(resolve => {
+
+            pool.query("CALL AddDepartment(?,?)", [departmentName, overHeadCost], function(error, results, fields) {
+                if (error) throw error;
+
+                resolve(results);
+            });
+
+        });
+
+    };
 };
 
 module.exports = Store;

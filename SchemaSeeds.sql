@@ -64,7 +64,8 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProducts`()
 BEGIN
-	SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity  FROM products AS p
+	SELECT p.item_id, p.product_name, d.department_name, p.price, p.stock_quantity  
+    FROM products AS p
 	INNER JOIN departments AS d ON d.department_id = p.department_id
 	ORDER BY p.item_id;
 END$$
@@ -97,4 +98,27 @@ BEGIN
 	UPDATE products SET stock_quantity = stock_quantity - quantity, product_sales = product_sales + totalSale WHERE item_id = itemID;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddDepartment`(
+	departmentName VARCHAR(100),
+    overHeadCost DECIMAL(10,4)
+)
+BEGIN
+	INSERT INTO departments (department_name,over_head_costs)
+    VALUES(departmentName,overHeadCost);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDepartmentSales`()
+BEGIN
+	SELECT d.department_id, d.department_name, d.over_head_costs, SUM(p.product_sales) AS product_sales, CAST(SUM(p.product_sales) - d.over_head_costs AS SIGNED)  AS total_profit
+    FROM departments AS d
+	INNER JOIN products AS p ON p.department_id = d.department_id
+    GROUP BY d.department_id
+	ORDER BY d.department_id;
+END$$
+DELIMITER ;
+
 
