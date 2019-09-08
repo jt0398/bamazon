@@ -16,16 +16,16 @@ CREATE TABLE products (
     department_id INT(10) NOT NULL,
     price DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
     stock_quantity INT(10) NOT NULL DEFAULT '0',
-    product_sales decimal(10,10) NOT NULL DEFAULT '0.0000',
+    product_sales decimal(10,4) NOT NULL DEFAULT '0.0000',
     FOREIGN KEY (department_id) REFERENCES departments(department_id)
 );
 
 INSERT INTO departments (department_name,over_head_costs)
-VALUES ('Clothing & Accessories', 1000),
-        ('Sports & Outdoors', 5000),
-        ('Electronics', 7500),
-        ('Books', 4500),
-        ('Toys & Games', 4500);
+VALUES ('Clothing & Accessories', 100),
+        ('Sports & Outdoors', 500),
+        ('Electronics', 750),
+        ('Books', 450),
+        ('Toys & Games', 450);
 
 INSERT INTO products (product_name,department_id,price,stock_quantity)
 VALUES ('CK Mens Sweatshirt',1,35.50,50),
