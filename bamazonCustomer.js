@@ -57,7 +57,7 @@ class BamazonCustomer {
     the stock quantity in the database and console displays total purchase price. If not, the console 
     displays a message informing the user that there's insufficient quantity. After both cases, 
     the user is given an option to place another order. */
-  async buyProduct(product, quantity, test) {
+  async buyProduct(product, quantity, displayHomeMenu) {
     //If there's enough stock, updates the stock quantity in the database
     if (product.stock_quantity > quantity) {
       //Calculates total price

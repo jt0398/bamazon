@@ -41,16 +41,16 @@ class BamazonManager {
 
     switch (answer.action) {
       case 1:
-        this.showAllProducts();
+        this.showAllProducts(displayHomeMenu);
         break;
       case 2:
-        this.showLowInventory();
+        this.showLowInventory(displayHomeMenu);
         break;
       case 3:
-        this.addToInventory();
+        this.addToInventory(displayHomeMenu);
         break;
       case 4:
-        this.addNewProduct();
+        this.addNewProduct(displayHomeMenu);
         break;
       default:
         console.log("\n\n");
@@ -60,7 +60,7 @@ class BamazonManager {
   }
 
   //Retrieves all product data from MySQL and displays them in console
-  async showAllProducts() {
+  async showAllProducts(displayHomeMenu) {
     const productList = await this.store.getAllProducts();
 
     //Creates a table object for displaying in console
@@ -78,11 +78,11 @@ class BamazonManager {
     //Display the product list in console in a table format
     console.log("\nALL PRODUCTS\n\n" + table.toString());
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 
   //Retrieves all product in the database with stock quanity less than 5
-  async showLowInventory() {
+  async showLowInventory(displayHomeMenu) {
     const productList = await this.store.getLowInventory();
 
     if (productList.length > 0) {
@@ -104,11 +104,11 @@ class BamazonManager {
       console.log("\nAll products have sufficient stock\n");
     }
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 
   //Prompts user to choose from list of products to add new inventory and updates database
-  async addToInventory() {
+  async addToInventory(displayHomeMenu) {
     const productList = await this.store.getAllProducts();
 
     //Creates a table object for displaying in console
@@ -156,11 +156,11 @@ class BamazonManager {
       console.log("\nInvalid product ID.\n\n");
     }
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 
   //Prompts user for new product information and add it to the database
-  async addNewProduct() {
+  async addNewProduct(displayHomeMenu) {
     const departmentList = await this.store.getDepartments();
 
     //Creates a table object for displaying in console
@@ -212,7 +212,7 @@ class BamazonManager {
 
     console.log("\nProduct added successfully.\n\n");
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 }
 
