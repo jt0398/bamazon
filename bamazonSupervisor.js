@@ -45,6 +45,7 @@ class BamazonSupervisor {
         this.addNewDepartment();
         break;
       default:
+        console.log("\n\n");
         displayHomeMenu();
         break;
     }

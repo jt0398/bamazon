@@ -53,6 +53,7 @@ class BamazonManager {
         this.addNewProduct();
         break;
       default:
+        console.log("\n\n");
         displayHomeMenu();
         break;
     }
