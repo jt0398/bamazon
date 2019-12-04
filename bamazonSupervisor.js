@@ -39,10 +39,10 @@ class BamazonSupervisor {
 
     switch (answer.action) {
       case 1:
-        this.showDepartmentSales();
+        this.showDepartmentSales(displayHomeMenu);
         break;
       case 2:
-        this.addNewDepartment();
+        this.addNewDepartment(displayHomeMenu);
         break;
       default:
         console.log("\n\n");
@@ -52,7 +52,7 @@ class BamazonSupervisor {
   }
 
   //Retrieves department sales data from MySQL and displays them in console
-  async showDepartmentSales() {
+  async showDepartmentSales(displayHomeMenu) {
     const departmentData = await this.store.getDepartmentSales();
 
     //Creates a table object for displaying in console
@@ -71,11 +71,11 @@ class BamazonSupervisor {
     //Display the department sales in console in a table format
     console.log("\nDEPARTMENT SALES\n\n" + table.toString() + "\n");
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 
   //Prompts user for new department information
-  async addNewDepartment() {
+  async addNewDepartment(displayHomeMenu) {
     //Prompts user to provide department name and over head cost
     const questions = [
       {
@@ -100,7 +100,7 @@ class BamazonSupervisor {
 
     console.log("\nDepartment added successfully.\n\n");
 
-    this.showMenu();
+    this.showMenu(displayHomeMenu);
   }
 }
 
