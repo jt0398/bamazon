@@ -1,7 +1,5 @@
 # Bamazon
 
-## Overview
-
 Bamazon is a Node CLI application which uses a MySQL database to store product and department data. In the main menu, there are three options.
 
 ![image](./images/mainMenu.jpg)
@@ -53,6 +51,14 @@ If a supervisor selects `View Product Sales by Department`, the application will
 If a supervisor selects `Create New Department`, the application allows the supervisor to add a completely new department to the store.
 
 ![image](./images/viewReports.gif)
+
+## Tech Stack
+
+The application uses the following technologies:
+
+- Node
+- MySQL
+- Custom ORM
 
 ## How to Install
 

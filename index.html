@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bamazon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <section class="container mb-5">
+        <h1>bamazon</h1>
+
+        <p>Bamazon is a Node CLI application which uses a MySQL database to store product and department data. In the
+            main menu, there are three options.
+        </p>
+
+        <p><img src="./images/mainMenu.jpg"></p>
+
+        <h3>Buy Products</h3>
+
+        <p>Customers can choose this menu to place an purchase order. It will first display all of the items available
+            for
+            sale.</p>
+
+        <p>The customer is then prompted for the product ID and quantity he or she would like to buy.</p>
+
+        <p>After the cusomter has placed the order, the application will check if there's enough stock to meet the
+            customer's request and updates the stock quantity in the database. The total purchase purchase price is
+            calculated and also tracked in the database for each product.</p>
+
+        <p>If there's not enough stock, the application displays a message `Insufficient quantity!` and then prevents
+            the
+            order from going through.</p>
+
+        <p><img src="./images/customerOrder.gif"></p>
+
+        <h3>Inventory</h3>
+
+        <p>Managers can choose this menu to manage products in the store. It will first display the menu options below:
+        </p>
+
+        <ul>
+            <li>View Products for Sale</li>
+
+            <li>View Low Inventory</li>
+
+            <li>Add to Inventory</li>
+
+            <li>Add New Product</li>
+        </ul>
+
+        <p>If a manager selects `View Products for Sale`, all products in the database will be displayed with their IDs,
+            names, prices, and quantities.</p>
+
+        <p>If a manager selects `View Low Inventory`, the application will display all products with an inventory count
+            lower than five.</p>
+
+        <p>If a manager selects `Add to Inventory`, the application allows the manager to add more quantity of any
+            product
+            in the store.</p>
+
+        <p>If a manager selects `Add New Product`, the application allows the manager to add a completely new product to
+            the store.</p>
+
+        <p><img src="./images/mangeInventory.gif"></p>
+
+        <h3>View Reports</h3>
+
+        <p>This application is for supervisor to manage departments in the store. It will first display the menu options
+            below:</p>
+
+        <ul>
+            <li>View Product Sales by Department</li>
+
+            <li>Create New Department</li>
+        </ul>
+
+
+        <p>If a supervisor selects `View Product Sales by Department`, the application will display a summarized table
+            of each department's sale.</p>
+
+        <p>If a supervisor selects `Create New Department`, the application allows the supervisor to add a completely
+            new
+            department to the store.</p>
+
+        <p><img src="./images/viewReports.gif"></p>
+
+    </section>
+</body>
+
+</html>
